@@ -1,256 +1,133 @@
-[![TileCraft](https://img.shields.io/badge/app-TileCraft%201.0.0%20alpha9-brightgreen.svg)](#)
-[![MIT License](https://img.shields.io/badge/license-GNU%20GPL%203-blue.svg)](LICENSE)
-[![Haxe 3](https://img.shields.io/badge/language-Haxe%203-orange.svg)](http://www.haxe.org)
-[![OpenFL 2](https://img.shields.io/badge/require-OpenFL 2-red.svg)](http://www.openfl.org)
-[![Cross platform](https://img.shields.io/badge/platform-win%2Bmac%2Blinux-yellow.svg)](http://www.openfl.org)
-# ![TILECRAFT](https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/git/title.png)
+# TileCraft
 
 2.5D fast multi-platform modeling tool to make tiles for games, icons or whatever you want!
 
-- Developed by [Simone Cingano](http://akifox.com)
+## History & Intent behind the fork
 
-- Based on [LGModeler](https://github.com/angryoctopus/lgmodeler) by [AngryOctupus](http://www.angryoctopus.co.nz/)
+Originally proposed as a prototyping challenge by [lostgarden.com](http://www.lostgarden.com/2013/10/prototyping-challenge-3d-modeling-tool.html),
+[AngryOctupus](http://www.angryoctopus.co.nz/) built the first prototype (called [LGModeler](https://github.com/angryoctopus/lgmodeler)).
+[Simone Cingano](http://akifox.com) used this as a base for the  ["TileCraft" fork](https://github.com/yupswing/TileCraft).
 
-- Original idea from [lostgarden.com](http://www.lostgarden.com/2013/10/prototyping-challenge-3d-modeling-tool.html)
+It's been a few years now, and the TileCraft downloads are [dead links](https://github.com/yupswing/TileCraft/issues/9). Moreover, it's almost impossible to compile it as haxe and openfl have had multiple breaking changes since the last commit on May 16, 2015 (unfortunately, haxe/haxelib/neko/library dependency version numbers weren't documented).
 
-![Alpha8 Interface](https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/git/interface.png)
+The objective of this fork is to maintain instructions on how to get the TileCraft fork to compile.
 
----
-[Read the Quick guide to understand how to use TileCraft](GUIDE.md)
----
+  - [x] Instructions tested on linux
+  - [ ] Instructions tested on mac
+  - [ ] Instructions tested on windows
 
-## Index
+### LGModeler
 
-- [Status of the project](#status)
-- [Milestones](#milestones)
-- [Download](#download)
-- [Build by the sources](#try-it)
-- [Lostgarden challenge](#lostgarden-challenge)
-- [Sample models](#examples)
-- [TODOs](#todo)
+![LGModeler](./media/lgmodeler.png)
+![LGModeler](./media/lgmodeler2.png)
 
-## Status
+### TileCraft
 
-The project is in an ALPHA development stage.
+![TileCraft](./media/tilecraft.png)
+![TileCraft](./media/tilecraft2.png)
 
-Anyway the BETA status is very close.
+## Compiling & Building
 
-See the [TODOs](#todo) to check the work in progress.
+0) Clone the repo & optionally uninstall existing haxe/haxelib and neko (if not, temporarily remove them from the $PATH).
 
-## Milestones
+    ```
+    git clone https://github.com/Wulf/TileCraft
 
- - **alpha:  Shape and model (load and save to Base64)**
- - **alpha2: Model renderer**
- - **alpha3: Lights renderer + postfx (Antialias+outline)**
- - **alpha4: Basic interface**
- - **alpha5: Save to PNG (image+model) and big housekeeping**
- - **alpha6: Shape list + improved gui**
- - **alpha7: Model editing**
- - **alpha8: Open/Save + check updates + improved feedbacks**
- - **alpha9: unreliable systools removed**
- - *beta stage: Improve interface and renderer* **<-- in progress**
- - *rc stage: Polish the app*
- - *release: Done!*
+    # neko, haxe, haxelib should return nothing when entered as commands
+    ```
 
-## Download
+1) Download Haxe 3.2.0 (released on 2015-05-12) for your platform, and unzip it to the `./haxe-3.2.0` folder in this repo.
 
-- *Windows* [Download 1.0.0-alpha9](http://akifox.com/tilecraft/get?p=windows)
-- *Mac* [Download 1.0.0-alpha9](http://akifox.com/tilecraft/get?p=mac)
-- *Linux32* [Download 1.0.0-alpha9](http://akifox.com/tilecraft/get?p=linux)
+2) Download Neko 2.3.0 for your platform, and unzip it to the `./neko-2.3.0` folder in this repo.
 
-## Try it
+3) Set your paths and check that they are set correctly:
 
-To compile the project by yourself you need to set up some stuff
+    ```
+    # Change the next line to reflect the path to the cloned repository
+    export REPO=/path/to/repo
+    ./source-this-to-set-haxe-path.sh
 
-#### Haxelib
+    # now the 'neko', 'haxe', and 'haxelib' commands
+    # should work and return something
+    ```
 
-Install the needed libraries (and keep them updated)
-````
-haxelib install openfl
-haxelib run openfl setup
-haxelib install actuate
-haxelib install akifox-transform
-haxelib install akifox-asynchttp
-haxelib install hxColorToolkit
-haxelib install compiletime
-haxelib install format
-haxelib install systools
-haxelib git plik https://github.com/yupswing/plik.git
-````
+    If it didn't work, do it manually:
 
-(Only Windows or Mac) Rebuild systools for your platform (the project need to be revived!)
-````
-haxelib run lime rebuild systools [windows|mac]
-````
+    - Add the neko folder to $PATH, then check if `neko` is a valid command in the terminal
+    - Add the haxe to $PATH, then check if `haxe` and `haxelib` are valid commands in the terminal
+    - See the `source-this-to-set-haxe-path.sh` file to see other paths you may need to set
 
-Clone this repository
-````
-git clone https://github.com/yupswing/TileCraft.git
-````
+4) Install dependencies 
 
-And finally try to compile and run (need to use legacy OpenFL)
+   `haxelib install <library> <version>`
 
-**Note**: NEKO is very slow, I strongly recommend to run native instead
-````
-cd tilecraft
-haxelib run lime test [windows|mac|linux] -Dv2 -Dlegacy
-````
+    ```
+    haxelib install openfl 3.1.4
+    haxelib run openfl setup
+    haxelib install lime 2.5.3
+    haxelib install actuate 1.8.4
+    haxelib install akifox-transform 2.2.0	
+    haxelib install akifox-asynchttp 0.4.1	
+    haxelib install hxcolortoolkit 1.6.0	
+    haxelib install compiletime 2.5.1	
+    haxelib install format 3.1.2	
+    haxelib install systools 1.1.0	
+    haxelib install hxcpp 3.2.94
+    haxelib install https://github.com/Wulf/plik.git
+    ```
 
-*Notes*: Sadly systools has lots of problems so I can't use the native Open and Save Dialogs right now
+5) `haxelib` likes to install the latest versions when libraries are listed as dependencies (even when you don't
+    want to use those versions). To makes sure the right versions are being used:
 
-On Mac it works only the native save dialog (you have to put a path by hand if you want to open a model).
+    ```
+    haxelib use openfl 3.1.4
+    haxelib use lime 2.5.3
+    haxelib use actuate 1.8.4
+    haxelib use akifox-transform 2.2.0	
+    haxelib use akifox-asynchttp 0.4.1	
+    haxelib use hxcolortoolkit 1.6.0	
+    haxelib use compiletime 2.5.1	
+    haxelib use format 3.1.2	
+    haxelib use systools 1.1.0	
+    haxelib use hxcpp 3.2.94
+    ```
 
-On Linux no native dialog works (you have to put a path by hand if you want to open a model).
+    (Note: This updates the `.current` file to point to the right version)
 
+6) If on windows/mac, run this once
 
-## Lostgarden challenge
+    ```
+    haxelib run lime rebuild systools [windows|mac]
+    ```
+    
+7) Finally, run the application (you just need to run this from now on to start the application)
 
-The original idea for this tool comes from [lostgarden.com](http://www.lostgarden.com/2013/10/prototyping-challenge-3d-modeling-tool.html)
+    ```
+    haxelib run lime test [windows|mac|linux] -Dv2 -Dlegacy
+    ```
 
-Here's the test-cases he provides to check the efficiency of the tool.
+    Note: you may need to set your $PATH correctly each time if you haven't added the haxe/neko folders permanently:
 
-This were made in just five 5 minutes (all of them!)
+    ```
+    # Change the next line to reflect the path to the cloned repository
+    export REPO=/path/to/repo
+    ./source-this-to-set-haxe-path.sh
+    ```
 
-![Test Cases](https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/git/test-cases.png)
+## Dependency Version Matrix
 
-## Examples
+Does not list Haxe (3.2.0) or Neko (2.3.0)
 
-Here some example models. To import them in TileCraft there are two ways:
-- Click on <img src="https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/git/guide/import.png" /> and after `CTRL`+`V` or `CMD`+`V` one of this example Base64 strings
-- Otherwise you can download the PNG and load it in TileCraft (yes [it works!](GUIDE.md#export))
-
-##### A complex shape
-<img src="https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/models/complex.png" />
-````
-Ff__1fb_QEW78K8-7ebTJDI_OVJXUpAjpswzUUY1p3At____9-F2vjJB33qSfoaPprO8Mzw5DkBLCjwAWldvAGlIj1CrKhJwRZrNMEtIzmJFGhKCq5rNkiNnvCLNRc3CI0USAnhmP0xpzGlDEt4BDng7eEPe3gEDLd4BQEXeAUOr7wFCvHkS
-````
-##### A truck
-<img src="https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/models/truck.png" />
-````
-Ff__1fb_QEW7PqXyzu3fRFFcFRoMnpdtzMiPUUY1p3At6pA-9-F2vjJB1d7WfoaPprO8GG6LIxgUiyMnbos5BB6aIkQjqxInFIs4RM2rEkR4qxIDEotnGj6LZ3ASi3iA3os5EH-aWTREiGoAVYs4RnerREaZq0RGu6tERt2rREYzq0Q03ppE
-````
-##### A car
-<img src="https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/models/car.png" />
-````
-Df__1fb_QEW7PqXyzu3fRFFcFRoMO4GPzMiPUUY1p3At6pA-9-F2vjJB1d7WfoaPprO8GDyLI0RFqxImPIs2RKurEgNWi1UDfItVLMy7My0ziDMtM7szQL2LWHBni1YANYtWcDV7RA..
-````
-##### An happy farm ;)
-<img src="https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/models/farm.png" />
-````
-E____wAA____PqXys9vuJDI_OVJXUpAjpswzUUY1p3At6pA-9-F2vjJB33qSfoaPprO8OxK8AUo0qwFLq5oBO828ATgjNBg5IlUDOd1VAwgeVSIBigESMXoBIjGIAQExqgEBUYgAMzYRiAE2FCWbNiM0vBYFFpo27ncCNt40BA..
-````
-##### A fancy home
-<img src="https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/models/home-fancy.png" />
-````
-Ev__1fb_QEW7PqXys9vuJDI_OVJXUpAjpswzUUY1x4J11M2l9fDJvjJB33qSfoaPprO8WzRo72tWaO9rjG2tWzdtrQk8bQgAaY0UQGl9Nghp3gAIPE0AWjeLrVk3TYtqjIutaYy9iwg8bZkwI94LMM3eCzDNVgsZNmh9
-````
-##### A dice
-<img src="https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/models/dice.png" />
-````
-C___1fb_4NrTPqXyDDJAJDI_OVJXUpAjpswzUUY1p3At6pA-9-F2vjJB33qSfoaPprO8EUspByFLKQczVjRnM5o0ZzOaeGdDVokSM1Z4Z0OaiVYzVlZnM5pWZ0N4iTQ.
-````
-##### HOME (lostgarden test-case)
-<img src="https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/models/lg-home.png" />
-````
-DP__1fb_QEW7PqXys9vuJDI_OVJXUpAjpswzUUY1x4J11M2l9fDJvjJB33qSfoaPprO8a4xdrVs3Xa0JPE0IAGmNFEBpfTYIad4ACDxNAFo3e61ZN02Laox7rWmMTYsIPF2Z
-````
-##### FACTORY (lostgarden test-case)
-<img src="https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/models/lg-factory.png" />
-````
-DP__1fb_QEW7PqXys9vuJDI_OVJXUpAjpswzUUY1x4J11M2l9fDJvjJB33qSpmxRprO8CS1tCAA1jRYIJt4ACC1NAAgtfZlLmt5FSIvNNkleIwlLi32rCy19qghpzUUIms1Z
-````
-##### STONE (lostgarden test-case)
-<img src="https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/models/lg-stone.png" />
-````
-CP__1fb_QEW7PqXys9vuJDI_OVJXUpAjpswzUUY1p3At6pA-9-F2vjJBY2tzfoaPoK66HTwqAh48KjUfPCpnPkQzZz6qRGc-u3dnPlWIZz5nVmc.
-````
-##### TREE (lostgarden test-case)
-<img src="https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/models/lg-tree.png" />
-````
-BP__1fb_QEW7PqXys9vuJDI_OVJXUpAjpswzUUY1p3At6pA-9-F2vjJBorAneocaoK66HTwqAh48KjUePCqbHTwqaA..
-````
-##### WOODCHUCK (lostgarden test-case)
-<img src="https://dl.dropboxusercontent.com/u/683344/akifox/tilecraft/models/lg-woodchuck.png" />
-````
-DP__1fb_QEW7SGV9s9vuKztNOVJXUpAjpswzUUY1p3At6pA-9-F2vjJBorAneocaoK66FDwqGkRGmgFEm5oBQ0aaV0ObmldEVZpmRKqaZkQ2Vq5EnFauQqtWvUJFVr0ADwMK
-````
-
-# TODO
-
-The tag in bold, before every entry, indicates at what stage that feature will be, hopefully, implemented.
-
- - General
-  - [x] Check online for updates
-  - [ ] **BETA** Housekeeping (make the whole more coherent)
-  - [ ] **RC** Unified dispatcher
-  - [ ] **RC** Online repository
-  - [ ] **RC** Make sure everything got disposed/destroyed
-  - [ ] **RC** Make sure every listener got removed
-  - [ ] **RC** Look and fix every TODO in the code
-  - [ ] **POST RELEASE** Support OpenFL3
- - Conversion of Java code to Haxe code
-  - [x] Internal Model
-  - [x] I/O + Base64 encoder/decoder *(improved in alpha4)*
-  - [x] Renderer (Fast+Lights)
-  - [x] GUInterface *(improved in alpha6)*
-  - [x] Model wysiwyg editor
- - Renderer
-  - [x] Convert LGModeler Renderer
-  - [x] Output different size ( 0.5 , 0.25 , 0.125 )
-  - [x] Fix incorrect rendering (ordering slices)
-  - [x] POSTFX shaders (apply FXAA to have smooth output image)
-  - [x] POSTFX make FXAA support alpha channel
-  - [x] POSTFX Use normal scaling with no PostFx if opengl not supported
-  - [x] Sync between renderers delays
-  - [ ] **BETA** Support edge smoothing
-  - [ ] **BETA** batch renderer and save to file
-  - [ ] **BETA** Trick NORM to have N/E Ramps and rounded N/S edges
- - Model
-  - [x] Convert LGModeler Model
-  - [x] Support for PNG Output with embedded model data
-  - [ ] **BETA** Add author and model name to PNG metadata
-  - [ ] **BETA** Save enabled and lock to model data (tcMa)
-  - [ ] **BETA** Permit change color0 and use it  as floor color (rendered)
-  - [ ] **BETA** Add more primitives (Prism, Arc)
-  - [ ] **BETA** Extend to 64 shapes
-  - [ ] **RC** Extend model to 32 colors (use the other 16 as replacement for batch rendering)
- - Interface
-  - [x] Resizable window
-  - [x] ShapeList dragging to reorder shapes in model
-  - [x] Add shape to model
-  - [x] Clone shape
-  - [x] I/O from string (Base64)
-  - [x] Feedback on Load/Save/Boot/Errors
-  - [x] Save/Load file
-    - Windows: Save and load native dialogs
-    - Mac: Save native + load textual (problems with systools)
-    - Linux: Save and load textual (problems with systools)
-  - [ ] **BETA**History (basic keep last 5 models as steps)
-  - [ ] **BETA** Report waiting (render especially) with Thread (and GUI modal 'box')
-  - [ ] **BETA** Minimap (Orthogonal Top and Side view)
-  - [ ] **BETA** ALT (center transformation), SHIFT (keep it square), Rotation (single element, whole context)
-  - [ ] **BETA** 90deg rotations (xyz) (changing positions and primitive type to simulate rotation)
-  - [ ] **RC** Support light style scheme
-
-
-
-  ## Utilities
-
-  ### Conversion regexp from java to haxe
-
-  ````
-  (public|private) (static )?([a-z]+)([^{;]+\([^{]+)
-  $1 $2function$4:$3
-  ````
-  ````
-  (int|byte|float|boolean)\[\] ([a-z0-9]+)
-  $2:Array<$1>
-  ````
-  ````
-  (int|byte|float|boolean) ([a-z0-9]+)
-  $2:$1
-  ````
-  ````
-  \(Int\)
-  Std.int
-  ````
+| Dependency          | Version   | Release Date |
+| ------------------- | --------- | ------------ |
+| openfl 		    	    | 3.1.4 	  | 2015-05-12   |
+| lime 		    	      | 2.5.3 	  | 2015-05-12   |
+| actuate						  | 1.8.4 	  | 2015-04-08   |
+| akifox-transform		| 2.2.0	    | 2015-03-23   |
+| akifox-asynchttp		| 0.4.1	    | 2015-05-08   |
+| hxColorToolkit			| 1.6.0	    | 2013-12-10   |
+| compiletime				  | 2.5.1	    | 2014-09-18   |
+| format						  | 3.1.2	    | 2014-11-12   |
+| systools						| 1.1.0	    | 2014-05-30   |
+| hxcpp						    | 3.2.94    | 2015-05-11   |
+| plik						    | [git](https://github.com/Wulf/plik.git) | 2015-09-22 |

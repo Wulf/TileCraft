@@ -2,3 +2,7 @@ Export/
 original/
 lgmodeler/
 *.hxproj
+neko-2.3.0/*
+haxe-3.2.0/*
+haxelib_downloads/*
+VERSIONS-RESEARCH.md

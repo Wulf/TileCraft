@@ -38,6 +38,7 @@
 	<haxelib name="compiletime" />
 	<haxelib name="hxColorToolkit" />
 	<haxelib name="systools" />
+	<ndll name="systools" haxelib="systools" />
 
 	<!-- ############################# CUSTOM BUILDS ############################ -->
 

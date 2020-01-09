@@ -1,0 +1,10 @@
+{
+  "name": "hxColorToolkit",
+  "url": "http://github.com/andyli/hxColorToolkit",
+  "license": "MIT",
+  "tags": ["cross","graphics","color"],
+  "description": "Color conversion and color scheme generation.",
+  "version": "1.6.0",
+  "releasenote": "Added ARGB. Hex now able to contain alpha value (in 0xaarrggbb format).",
+  "contributors": ["andyli"]
+}

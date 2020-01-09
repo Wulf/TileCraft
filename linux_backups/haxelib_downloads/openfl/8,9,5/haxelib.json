@@ -1,0 +1,11 @@
+{
+	"name": "openfl",
+	"url": "http://www.openfl.org",
+	"license": "MIT",
+	"tags": [],
+	"description": "The \"Open Flash Library\" for fast 2D development",
+	"version": "8.9.5",
+	"releasenote": "Neko fixes, filter fixes, minor HL patch",
+	"contributors": [ "singmajesty" ],
+	"classPath": "src"
+}

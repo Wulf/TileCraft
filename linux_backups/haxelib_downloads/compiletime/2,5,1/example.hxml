@@ -1,0 +1,21 @@
+-main Example
+-neko example/Example.hx.n
+-lib markdown
+-cp src/
+-cp example/
+
+--next 
+
+-main Example 
+-js example/Example.hx.js
+-lib markdown
+-cp src/
+-cp example/
+
+--next 
+
+-main Example 
+-swf example/Example.hx.swf
+-lib markdown
+-cp src/
+-cp example/

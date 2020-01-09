@@ -1,0 +1,8 @@
+-main SVGExport
+-neko ../svg.n
+-lib lime
+-lib openfl
+-lib svg
+-D openfl-legacy
+-D lime-legacy
+--remap flash:openfl
