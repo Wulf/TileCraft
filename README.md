@@ -8,7 +8,7 @@ Originally proposed as a prototyping challenge by [lostgarden.com](http://www.lo
 [AngryOctupus](http://www.angryoctopus.co.nz/) built the first prototype (called [LGModeler](https://github.com/angryoctopus/lgmodeler)).
 [Simone Cingano](http://akifox.com) used this as a base for the  ["TileCraft" fork](https://github.com/yupswing/TileCraft).
 
-It's been a few years now, and the TileCraft downloads are [dead links](https://github.com/yupswing/TileCraft/issues/9). Moreover, it's almost impossible to compile it as haxe and openfl have had multiple breaking changes since the last commit on May 16, 2015 (unfortunately, haxe/haxelib/neko/library dependency version numbers weren't documented).
+It's been a few years now, and the TileCraft downloads ~are [dead links](https://github.com/yupswing/TileCraft/issues/9)~ have been [re-uploaded](https://github.com/yupswing/TileCraft/releases/tag/v1.0.0-alpha.9). Moreover, it's almost impossible to compile it as haxe and openfl have had multiple breaking changes since the last commit on May 16, 2015 (unfortunately, haxe/haxelib/neko/library dependency version numbers weren't documented).
 
 The objective of this fork is to maintain instructions on how to get the TileCraft fork to compile.
 
